@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quotes</title>
+  </head>
+  <body>
+    <a href="/logout">Log out</a>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Welcome, {{request.session.user_alias}}!</h1>
+    <br>
+    <h2>Quoteable Quotes: </h2>
+    {% for quote in all_quotes %}
+    <br>
+    <p>{{quote.who}}: {{quote.saying}}</p>
+    <br>
+    Posted by: <a href="/user/{{quote.user.id}}">{{quote.user.alias}}</a>
+    <br>
+    <td><a href="/addfav/{{quote.id}}">Add to My List</a></td>
+    {% endfor %}
+    <h2>Your Favorites: </h2>
+    {% for quote in fave_quotes %}
+      <br>
+      <h4>{{quote.who}}: {{quote.saying}}</h4>
+      <br>
+      Posted by: <a href="/user/{{quote.id}}">{{quote.user.alias}}</a>
+      <br>
+      <td><a href="/removefav/{{quote.id}}">Remove From My List</a></td>
+      {% endfor %}
+    <h2>Contribute a Quote: </h2>
+    <form class="" action="/addquote" method="post">
+      {% csrf_token %}
+      <label>Quoted by:</label><input type="text" name="who" value="">
+      <label>Message: </label><input type="text" name="saying" value="">
+      <br>
+      <input type="submit" name="" value="Submit">
+    </form>
+  </body>
+</html>

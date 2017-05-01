@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+      </head>
+      <body>
+        <body>
+          <div class="wrapper">
+            <h1>Welcome</h1>
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            <h2>Register</h2>
+            <form class="" action="/reg" method="post">
+              {% csrf_token %}
+              <label>Name: </label><input type="text" name="name" value="">
+              <br>
+              <label>Alias: </label><input type="text" name="alias" value="">
+              <br>
+              <label>Email: </label><input type="email" name="email" value="">
+              <br>
+              <label>Password: </label><input type="password" name="password" value="">
+              <br>
+              <p>*Password should be at least 8 characters</p>
+              <label >Confirm PW: </label><input type="password" name="confirm_password" value="">
+              <br>
+              <label >Date of Birth</label><input type="date" name="birth_date" value="">
+              <br>
+              <input type="submit" name="" value="Register">
+            </form>
+            <h2>Login</h2>
+            <form class="" action="/login" method="post">
+              {% csrf_token %}
+              <label>Email: </label><input type="email" name="email" value="">
+              <br>
+              <label>Password: </label><input type="password" name="password" value="">
+              <br>
+              <input type="submit" name="" value="Login">
+            </form>
+          </div>
+      </body>
+    </html>
+
+  </body>
+</html>
